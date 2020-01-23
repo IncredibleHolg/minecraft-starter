@@ -1,0 +1,25 @@
+# Systemd unit file for minecraft-sky server
+[Unit]
+Description=minecraft-kimadu server
+After=syslog.target network.target
+
+[Service]
+Type=forking
+Environment=LABEL="minecraft_kimadu"
+Environment=JAVA_HOME=/home/jdk
+Environment=JAVA=/home/jdk/bin/java
+Environment=PIDFILE=/home/MC-Server/KiMaDu/minecraftd.pid
+Environment=SERVERDIR=/home/MC-Server/KiMaDu
+ExecStart=/home/MC-Server/KiMaDu/serverstart.sh
+ExecStop=/bin/kill -15 $MAINPID
+PIDFile=/home/MC-Server/KiMaDu/minecraftd.pid
+
+User=opensim
+Group=users
+UMask=0007
+# RestartSec=120
+#Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
